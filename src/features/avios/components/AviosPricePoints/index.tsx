@@ -1,11 +1,21 @@
 import { ApiResponse } from "@/types";
 import { Card, CardContent, Stack, Typography } from "@mui/material";
+import { useMemo } from "react";
 
 export type AviosPricePointsProps = Readonly<{
   data: ApiResponse;
 }>;
 
 export default function AviosPricePoints({ data }: AviosPricePointsProps) {
+  const currencyFormat = useMemo(
+    () =>
+      new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+      }),
+    []
+  );
+
   return (
     <Stack spacing={2}>
       <Typography variant="h6">
@@ -22,8 +32,8 @@ export default function AviosPricePoints({ data }: AviosPricePointsProps) {
               </Typography>
 
               <Typography variant="body2">
-                Cash discount: {pricePoint.cashDiscount.amount.toFixed(2)}{" "}
-                {pricePoint.cashDiscount.currency}
+                Cash discount:{" "}
+                {currencyFormat.format(pricePoint.cashDiscount.amount)}
               </Typography>
 
               <Typography variant="body2">
