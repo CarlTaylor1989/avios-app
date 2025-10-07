@@ -4,8 +4,8 @@ import { z } from "zod";
 export const AviosFormSchema = z.object({
   departureAirportCode: z.string(),
   arrivalAirportCode: z.string(),
-  departureTime: z.string(),
-  arrivalTime: z.string(),
+  departureTime: z.date(),
+  arrivalTime: z.date(),
   price: z.string(),
   currency: z.string()
 });

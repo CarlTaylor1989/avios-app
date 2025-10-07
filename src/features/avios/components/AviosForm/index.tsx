@@ -7,6 +7,9 @@ import {
   TextField
 } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AviosFormInput, AviosFormOutput } from "../../forms/avios-form";
 
 export default function AviosForm() {
@@ -17,7 +20,7 @@ export default function AviosForm() {
   >();
 
   return (
-    <>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Controller
         control={control}
         name="departureAirportCode"
@@ -59,10 +62,10 @@ export default function AviosForm() {
         name="departureTime"
         render={({ field, fieldState }) => (
           <FormControl error={fieldState.invalid}>
-            <TextField
-              label="Departure Time"
-              type="datetime-local"
+            <DateTimePicker
               {...field}
+              label="Departure Time"
+              value={new Date(field.value)}
             />
           </FormControl>
         )}
@@ -73,7 +76,11 @@ export default function AviosForm() {
         name="arrivalTime"
         render={({ field, fieldState }) => (
           <FormControl error={fieldState.invalid}>
-            <TextField label="Arrival Time" type="datetime-local" {...field} />
+            <DateTimePicker
+              {...field}
+              label="Arrival Time"
+              value={new Date(field.value)}
+            />
           </FormControl>
         )}
       />
@@ -101,6 +108,6 @@ export default function AviosForm() {
           </FormControl>
         )}
       />
-    </>
+    </LocalizationProvider>
   );
 }

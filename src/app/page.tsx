@@ -17,7 +17,11 @@ import AviosPricePoints from "@/features/avios/components/AviosPricePoints";
 export default function Home() {
   const [data, setData] = useState<ApiResponse>();
   const form = useForm<AviosFormInput, undefined, AviosFormOutput>({
-    resolver: aviosFormResolver
+    resolver: aviosFormResolver,
+    defaultValues: {
+      departureTime: new Date(),
+      arrivalTime: new Date()
+    }
   });
 
   const { handleSubmit } = form;
